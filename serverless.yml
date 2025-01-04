@@ -1,0 +1,27 @@
+service: minimal-node-serverless-rest
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: v1  # <--- specify a stage
+
+functions:
+  app:
+    handler: src/handler.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: '{proxy+}'
+          method: ANY
+
+# custom:
+#   serverless-offline:
+#     noPrependStageInUrl: true
+
+plugins:
+  - serverless-offline

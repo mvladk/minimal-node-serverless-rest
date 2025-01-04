@@ -1,0 +1,26 @@
+{
+    "name": "minimal-node-serverless-rest",
+    "version": "1.0.0",
+    "scripts": {
+        "db:up": "docker compose up -d",
+        "db:down": "docker compose down",
+        "db:create": "bash scripts/create-db.sh",
+        "db:migrate": "knex migrate:latest --env development",
+        "db:rollback": "knex migrate:rollback --env development",
+        "dev": "serverless offline",
+        "start:local": "scripts/start-db.sh && npm run db:migrate && npm run dev",
+        "deploy": "serverless deploy"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "knex": "^2.4.2",
+        "mysql2": "^2.3.3",
+        "pino": "^8.14.0",
+        "pino-pretty": "^13.0.0",
+        "serverless-http": "^3.0.5"
+    },
+    "devDependencies": {
+        "serverless": "^3.40.0",
+        "serverless-offline": "^13.2.9"
+    }
+}
